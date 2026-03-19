@@ -22,36 +22,55 @@ public class AuthFilter extends HttpFilter implements Filter {
         String uri = req.getRequestURI();
         String contextPath = req.getContextPath();
 
-        boolean isLoginRequest = uri.equals(contextPath + "/login");
-        boolean isLogoutRequest = uri.equals(contextPath + "/logout");
-        boolean isPublicResource =
-                uri.contains(".css") ||
-                        uri.contains(".js") ||
-                        uri.contains(".png") ||
-                        uri.contains(".jpg") ||
-                        uri.contains(".jpeg") ||
-                        uri.contains(".gif") ||
-                        uri.contains(".svg") ||
-                        uri.contains(".woff") ||
-                        uri.contains(".woff2");
+        boolean isStatic =
+                uri.contains(".css") || uri.contains(".js") || uri.contains(".png") ||
+                        uri.contains(".jpg") || uri.contains(".jpeg") || uri.contains(".gif") ||
+                        uri.contains(".svg") || uri.contains(".woff") || uri.contains(".woff2");
+
+        boolean isAdminLogin = uri.equals(contextPath + "/login");
+        boolean isLogout = uri.equals(contextPath + "/logout");
+
+        boolean isPublicLocataire =
+                uri.equals(contextPath + "/") ||
+                        uri.equals(contextPath + "/index.jsp") ||
+                        uri.equals(contextPath + "/register") ||
+                        uri.equals(contextPath + "/login-locataire") ||
+                        uri.equals(contextPath + "/offres") ||
+                        uri.equals(contextPath + "/demande-location");
+
+        boolean isLocataireProtected =
+                uri.equals(contextPath + "/profil-locataire") ||
+                        uri.equals(contextPath + "/mes-demandes");
 
         HttpSession session = req.getSession(false);
-        boolean loggedIn = (session != null && session.getAttribute("user") != null);
+        boolean adminLogged = session != null && session.getAttribute("user") != null;
+        boolean locataireLogged = session != null && session.getAttribute("locataireSession") != null;
 
-        // Empêche le cache des pages protégées
         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         resp.setHeader("Pragma", "no-cache");
         resp.setDateHeader("Expires", 0);
 
-        if (!loggedIn && !(isLoginRequest || isLogoutRequest || isPublicResource)) {
+        if (isStatic || isAdminLogin || isLogout || isPublicLocataire) {
+            chain.doFilter(req, resp);
+            return;
+        }
+
+        if (isLocataireProtected) {
+            if (locataireLogged) {
+                chain.doFilter(req, resp);
+            } else {
+                resp.sendRedirect(contextPath + "/login-locataire");
+            }
+            return;
+        }
+
+        if (!adminLogged) {
             resp.sendRedirect(contextPath + "/login");
             return;
         }
 
-        // ADMIN uniquement pour /utilisateurs
-        if (loggedIn && uri.startsWith(contextPath + "/utilisateurs")) {
+        if (uri.startsWith(contextPath + "/utilisateurs")) {
             Utilisateur user = (Utilisateur) session.getAttribute("user");
-
             if (user == null || user.getRole() == null || !"ADMIN".equalsIgnoreCase(user.getRole())) {
                 resp.sendRedirect(contextPath + "/dashboard");
                 return;

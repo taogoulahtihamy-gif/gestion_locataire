@@ -1,4 +1,5 @@
 `<%@ page contentType="text/html;charset=UTF-8" %>
+<% response.sendRedirect("offres"); %>
 <!DOCTYPE html>
 <html>
 <head>
