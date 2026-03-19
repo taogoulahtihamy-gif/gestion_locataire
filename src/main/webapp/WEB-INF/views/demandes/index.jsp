@@ -10,7 +10,8 @@
 <div class="page-card">
     <h1 class="page-title">Gestion des demandes</h1>
     <p class="page-subtitle">Suivi des demandes de location soumises par les locataires.</p>
-
+   <div class="table-wrapper">
+       <table class="table-modern" style="min-width: 700px;">
     <div class="table-responsive mt-4">
         <table class="table table-bordered bg-white">
             <thead>
@@ -75,6 +76,8 @@
             %>
             </tbody>
         </table>
+    </div>
+    </table>
     </div>
 </div>
 
