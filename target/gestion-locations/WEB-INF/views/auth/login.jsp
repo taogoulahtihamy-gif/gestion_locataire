@@ -113,7 +113,6 @@
 
     <div class="demo-box">
         <strong>Compte par défaut :</strong><br>
-        admin@admin.com / admin123
     </div>
 
     <%
@@ -137,6 +136,13 @@
         </div>
 
         <button type="submit" class="btn-login">Se connecter</button>
+        <div style="margin-top:20px;text-align:center;">
+            <div style="margin-bottom:10px;color:#6b7280;">Vous êtes locataire ?</div>
+            <a href="<%= request.getContextPath() %>/login-locataire"
+               style="display:inline-block;padding:10px 16px;border-radius:10px;background:#eef2ff;color:#1d4ed8;font-weight:600;text-decoration:none;">
+                Accéder à l’espace locataire
+            </a>
+        </div>
     </form>
 </div>
 

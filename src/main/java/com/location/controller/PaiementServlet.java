@@ -60,7 +60,19 @@ public class PaiementServlet extends HttpServlet {
 
             Paiement item = (id != null) ? service.findById(id) : new Paiement();
 
-            Double montant = Double.valueOf(request.getParameter("montant"));
+            Double montant = null;
+
+            if (contrat != null && contrat.getUniteLocation() != null) {
+                if (contrat.getUniteLocation().getLoyerMensuel() != null) {
+                    montant = contrat.getUniteLocation().getLoyerMensuel();
+                } else if (contrat.getUniteLocation().getLoyer() != null) {
+                    montant = contrat.getUniteLocation().getLoyer();
+                }
+            }
+
+            if (montant == null) {
+                montant = Double.valueOf(request.getParameter("montant"));
+            }
             String modePaiement = request.getParameter("modePaiement");
 
             Calendar cal = Calendar.getInstance();

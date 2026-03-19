@@ -369,6 +369,10 @@
                 <a href="<%= request.getContextPath() %>/locataires" class="<%= uri.contains("/locataires") ? "active" : "" %>">Locataires</a>
                 <a href="<%= request.getContextPath() %>/contrats" class="<%= uri.contains("/contrats") ? "active" : "" %>">Contrats</a>
                 <a href="<%= request.getContextPath() %>/paiements" class="<%= uri.contains("/paiements") ? "active" : "" %>">Paiements</a>
+                 <a href="${pageContext.request.contextPath}/demandes"
+                       class="<%= uri.contains("/demandes") ? "active" : "" %>">
+                       Demandes
+                    </a>
                 <a href="<%= request.getContextPath() %>/utilisateurs" class="<%= uri.contains("/utilisateurs") ? "active" : "" %>">Utilisateurs</a>
                 <a href="<%= request.getContextPath() %>/reports" class="<%= uri.contains("/reports") ? "active" : "" %>">Rapports</a>
                 <a href="<%= request.getContextPath() %>/logout">Déconnexion</a>

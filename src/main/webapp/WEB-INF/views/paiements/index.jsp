@@ -26,15 +26,21 @@
         <div class="form-grid">
             <div class="field">
                 <label>Contrat</label>
-                <select name="contratId" required>
+               <select name="contratId" id="contratId" required>
                     <option value="">Choisir</option>
                     <%
                         if (contrats != null) {
                             for (ContratLocation c : contrats) {
                     %>
-                    <option value="<%= c.getId() %>" <%= item != null && item.getContrat() != null && item.getContrat().getId().equals(c.getId()) ? "selected" : "" %>>
-                        Contrat #<%= c.getId() %>
-                    </option>
+                   <option value="<%= c.getId() %>"
+                           data-montant="<%= (c.getUniteLocation() != null && c.getUniteLocation().getLoyerMensuel() != null)
+                                   ? c.getUniteLocation().getLoyerMensuel()
+                                   : (c.getUniteLocation() != null && c.getUniteLocation().getLoyer() != null
+                                       ? c.getUniteLocation().getLoyer()
+                                       : 0) %>"
+                           <%= item != null && item.getContrat() != null && item.getContrat().getId().equals(c.getId()) ? "selected" : "" %>>
+                       Contrat #<%= c.getId() %>
+                   </option>
                     <%
                             }
                         }
@@ -44,7 +50,11 @@
 
             <div class="field">
                 <label>Montant</label>
-                <input type="number" step="0.01" name="montant" value="<%= item != null ? item.getMontant() : "" %>" required>
+             <input type="number" step="0.01" name="montantAffiche" id="montant"
+                    value="<%= item != null ? item.getMontant() : "" %>" readonly
+                    style="background:#f3f4f6;cursor:not-allowed;">
+              <input type="hidden" name="montant" id="montantHidden"
+                     value="<%= item != null ? item.getMontant() : "" %>">
             </div>
 
             <div class="field">
@@ -105,7 +115,7 @@
                 <td><%= p.getNumeroRecu() != null ? p.getNumeroRecu() : "-" %></td>
                 <td>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                        <a class="btn-soft btn-primary-soft" href="<%= request.getContextPath() %>/receipt?id=<%= p.getId() %>">Reçu</a>
+                        <a class="btn-soft btn-primary-soft" href="<%= request.getContextPath() %>/paiements/receipt-pdf?id=<%= p.getId() %>">Reçu</a>
                         <a class="btn-soft btn-warning-soft" href="<%= request.getContextPath() %>/paiements?action=edit&id=<%= p.getId() %>">Modifier</a>
                         <a class="btn-soft btn-danger-soft" href="<%= request.getContextPath() %>/paiements?action=delete&id=<%= p.getId() %>" onclick="return confirm('Supprimer ce paiement ?')">Supprimer</a>
                     </div>
@@ -126,5 +136,31 @@
     </div>
     </div>
 </div>
+<<script>
+     const contratSelect = document.getElementById("contratId");
+     const montantInput = document.getElementById("montant");
+     const montantHidden = document.getElementById("montantHidden");
 
+     function remplirMontantDepuisContrat() {
+         const selectedOption = contratSelect.options[contratSelect.selectedIndex];
+         if (!selectedOption) return;
+
+         const montant = selectedOption.getAttribute("data-montant");
+         if (montant && montant !== "0") {
+             montantInput.value = montant;
+             montantHidden.value = montant;
+         } else {
+             montantInput.value = "";
+             montantHidden.value = "";
+         }
+     }
+
+     if (contratSelect && montantInput && montantHidden) {
+         contratSelect.addEventListener("change", remplirMontantDepuisContrat);
+
+         if (contratSelect.value) {
+             remplirMontantDepuisContrat();
+         }
+     }
+ </script>
 <%@ include file="/WEB-INF/views/common/footer.jspf" %>

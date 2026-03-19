@@ -16,7 +16,7 @@ small.muted{color:#64748b}
     <a href="${pageContext.request.contextPath}/immeubles">Immeubles</a>
     <a href="${pageContext.request.contextPath}/unites">Unités</a>
     <a href="${pageContext.request.contextPath}/locataires">Locataires</a>
-    <a href="${pageContext.request.contextPath}/demandes">Demandes</a>
+    <a href="${pageContext.request.contextPath}/demandes"Demandes</a>
     <a href="${pageContext.request.contextPath}/contrats">Contrats</a>
     <a href="${pageContext.request.contextPath}/paiements">Paiements</a>
     <a href="${pageContext.request.contextPath}/users">Utilisateurs</a>

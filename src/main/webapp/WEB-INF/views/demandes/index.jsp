@@ -1,1 +1,81 @@
-<%@ page contentType="text/html;charset=UTF-8" import="java.util.*,com.location.entity.*" %><!DOCTYPE html><html><head><title>Demandes</title></head><body><%@ include file="/WEB-INF/views/fragments/header.jspf" %><div class="container"><h1>Demandes de location</h1><% DemandeLocation item=(DemandeLocation)request.getAttribute("item"); List<Locataire> locataires=(List<Locataire>)request.getAttribute("locataires"); List<UniteLocation> unites=(List<UniteLocation>)request.getAttribute("unites"); %><form method="post" action="${pageContext.request.contextPath}/demandes"><input type="hidden" name="id" value="<%= item!=null?item.getId():"" %>"><div class="row"><div><label>Locataire</label><select name="locataireId"><% for(Locataire l:locataires){ %><option value="<%= l.getId() %>"><%= l.getNom() %></option><% } %></select></div><div><label>Unité</label><select name="uniteId"><% for(UniteLocation u:unites){ %><option value="<%= u.getId() %>"><%= u.getReference() %> - <%= String.format("%,.0f",u.getLoyerMensuel()) %> FCFA</option><% } %></select></div></div><div class="row"><div><label>Statut</label><select name="statut"><option>EN_ATTENTE</option><option>VALIDEE</option><option>REFUSEE</option></select></div><div><label>Commentaire</label><input name="commentaire" value="<%= item!=null&&item.getCommentaire()!=null?item.getCommentaire():"" %>"></div></div><br><button class="btn" type="submit">Enregistrer</button></form><table><tr><th>ID</th><th>Locataire</th><th>Unité</th><th>Date</th><th>Statut</th><th>Commentaire</th><th>Actions</th></tr><% for(DemandeLocation d:(List<DemandeLocation>)request.getAttribute("items")){ %><tr><td><%= d.getId() %></td><td><%= d.getLocataire()!=null?d.getLocataire().getNom():"" %></td><td><%= d.getUniteLocation()!=null?d.getUniteLocation().getReference():"" %></td><td><%= d.getDateDemande() %></td><td><%= d.getStatut() %></td><td><%= d.getCommentaire() %></td><td><a class="btn btn-danger" href="${pageContext.request.contextPath}/demandes?action=delete&id=<%= d.getId() %>">Supprimer</a></td></tr><% } %></table></div></body></html>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.location.entity.DemandeLocation" %>
+<%
+    List<DemandeLocation> items = (List<DemandeLocation>) request.getAttribute("items");
+%>
+
+<%@ include file="/WEB-INF/views/common/header.jspf" %>
+
+<div class="page-card">
+    <h1 class="page-title">Gestion des demandes</h1>
+    <p class="page-subtitle">Suivi des demandes de location soumises par les locataires.</p>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered bg-white">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Locataire</th>
+                <th>Email</th>
+                <th>Unité</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Commentaire</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                if (items != null && !items.isEmpty()) {
+                    for (DemandeLocation d : items) {
+            %>
+            <tr>
+                <td><%= d.getId() %></td>
+                <td><%= d.getLocataire() != null ? d.getLocataire().getNom() : "-" %></td>
+                <td><%= d.getLocataire() != null ? d.getLocataire().getEmail() : "-" %></td>
+                <td>
+                    <%= d.getUniteLocation() != null
+                            ? (d.getUniteLocation().getReference() != null
+                                ? d.getUniteLocation().getReference()
+                                : "Unité #" + d.getUniteLocation().getId())
+                            : "-" %>
+                </td>
+                <td><%= d.getDateDemande() %></td>
+                <td><%= d.getStatut() %></td>
+                <td><%= d.getCommentaire() != null ? d.getCommentaire() : "-" %></td>
+               <td>
+                   <% if ("EN_ATTENTE".equalsIgnoreCase(d.getStatut())) { %>
+                       <a class="btn btn-sm btn-success" href="<%= request.getContextPath() %>/demandes?action=accepter&id=<%= d.getId() %>">Accepter</a>
+                       <a class="btn btn-sm btn-danger" href="<%= request.getContextPath() %>/demandes?action=refuser&id=<%= d.getId() %>">Refuser</a>
+
+                   <% } else if ("ACCEPTEE".equalsIgnoreCase(d.getStatut())) { %>
+                       <a class="btn btn-sm btn-primary" href="<%= request.getContextPath() %>/contrats?action=fromDemande&demandeId=<%= d.getId() %>">Créer contrat</a>
+
+                   <% } else if ("CONTRAT_CREE".equalsIgnoreCase(d.getStatut())) { %>
+                       <span class="badge bg-primary">Contrat créé</span>
+
+                   <% } else if ("REFUSEE".equalsIgnoreCase(d.getStatut())) { %>
+                       <span class="badge bg-danger">Refusée</span>
+
+                   <% } else { %>
+                       <span class="text-muted">Traitée</span>
+                   <% } %>
+               </td>
+            </tr>
+            <%
+                    }
+                } else {
+            %>
+            <tr>
+                <td colspan="8" class="text-center">Aucune demande trouvée.</td>
+            </tr>
+            <%
+                }
+            %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%@ include file="/WEB-INF/views/common/footer.jspf" %>

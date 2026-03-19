@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet("/demandes")
 public class DemandeServlet extends HttpServlet {
@@ -26,17 +27,42 @@ public class DemandeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if ("delete".equals(req.getParameter("action")) && req.getParameter("id") != null) {
-            service.delete(Long.valueOf(req.getParameter("id")));
+        String action = req.getParameter("action");
+        String idParam = req.getParameter("id");
+
+        if ("delete".equals(action) && idParam != null) {
+            service.delete(Long.valueOf(idParam));
             resp.sendRedirect(req.getContextPath() + "/demandes");
             return;
         }
 
-        if ("edit".equals(req.getParameter("action")) && req.getParameter("id") != null) {
-            req.setAttribute("item", service.findById(Long.valueOf(req.getParameter("id"))));
+        if ("edit".equals(action) && idParam != null) {
+            req.setAttribute("item", service.findById(Long.valueOf(idParam)));
         }
 
-        req.setAttribute("items", service.findAll());
+        if ("accepter".equals(action) && idParam != null) {
+            DemandeLocation demande = service.findById(Long.valueOf(idParam));
+            if (demande != null) {
+                demande.setStatut("ACCEPTEE");
+                service.save(demande);
+            }
+            resp.sendRedirect(req.getContextPath() + "/demandes");
+            return;
+        }
+
+        if ("refuser".equals(action) && idParam != null) {
+            DemandeLocation demande = service.findById(Long.valueOf(idParam));
+            if (demande != null) {
+                demande.setStatut("REFUSEE");
+                service.save(demande);
+            }
+            resp.sendRedirect(req.getContextPath() + "/demandes");
+            return;
+        }
+
+        List<DemandeLocation> items = service.findAll();
+
+        req.setAttribute("items", items);
         req.setAttribute("locataires", locataireService.findAll());
         req.setAttribute("unites", uniteService.disponibles());
 
@@ -46,7 +72,6 @@ public class DemandeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         try {
             DemandeLocation d = (req.getParameter("id") == null || req.getParameter("id").isBlank())
                     ? new DemandeLocation()

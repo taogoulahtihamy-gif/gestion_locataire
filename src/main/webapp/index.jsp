@@ -1,5 +1,7 @@
 `<%@ page contentType="text/html;charset=UTF-8" %>
-<% response.sendRedirect("offres"); %>
+<%
+    response.sendRedirect(request.getContextPath() + "/login");
+%>
 <!DOCTYPE html>
 <html>
 <head>

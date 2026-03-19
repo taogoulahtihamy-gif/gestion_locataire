@@ -9,6 +9,7 @@ public class PasswordUtil {
     private PasswordUtil() {
     }
 
+    // Hash SHA-256
     public static String hash(String raw) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -21,5 +22,11 @@ public class PasswordUtil {
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalStateException("SHA-256 indisponible", e);
         }
+    }
+
+    // ✅ AJOUT ICI
+    public static boolean verify(String rawPassword, String hashedPassword) {
+        if (rawPassword == null || hashedPassword == null) return false;
+        return hash(rawPassword).equals(hashedPassword);
     }
 }

@@ -78,6 +78,7 @@
         <span class="badge-soft"><%= items != null ? items.size() : 0 %> unité(s)</span>
     </div>
 
+    <div class="table-wrapper">
     <div style="overflow-x:auto;">
         <table class="table-modern">
             <thead>
@@ -122,6 +123,7 @@
             %>
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 

@@ -13,12 +13,28 @@
             font-family: Arial, sans-serif;
             margin: 0;
         }
-        .navbar-brand { font-weight: bold; }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .top-user {
+            color: white;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .layout-row {
+            min-height: calc(100vh - 56px);
+        }
+
         .sidebar {
             min-height: calc(100vh - 56px);
             background: #1f2937;
             padding-top: 20px;
         }
+
         .sidebar a {
             display: block;
             color: #e5e7eb;
@@ -27,12 +43,19 @@
             border-radius: 8px;
             margin: 6px 10px;
             transition: 0.2s;
+            font-weight: 500;
         }
-        .sidebar a:hover, .sidebar a.active {
+
+        .sidebar a:hover,
+        .sidebar a.active {
             background: #2563eb;
             color: white;
         }
-        .content-area { padding: 30px; }
+
+        .content-area {
+            padding: 30px;
+        }
+
         .page-card {
             background: white;
             border-radius: 15px;
@@ -40,52 +63,68 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin-bottom: 25px;
         }
+
         .page-title {
             font-size: 32px;
             font-weight: 700;
             color: #111827;
             margin-bottom: 6px;
+            line-height: 1.2;
         }
+
         .page-subtitle {
             color: #6b7280;
             margin-bottom: 0;
         }
+
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 18px;
         }
+
         .field {
             display: flex;
             flex-direction: column;
         }
+
         .field label {
             font-weight: 600;
             margin-bottom: 8px;
             color: #374151;
         }
-        .field input, .field textarea, .field select {
+
+        .field input,
+        .field textarea,
+        .field select {
             border: 1px solid #d1d5db;
             border-radius: 12px;
             padding: 12px 14px;
             background: #f9fafb;
             outline: none;
+            width: 100%;
         }
+
         .field textarea {
             min-height: 110px;
             resize: vertical;
         }
-        .field input:focus, .field textarea:focus, .field select:focus {
+
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
             border-color: #2563eb;
             background: white;
             box-shadow: 0 0 0 3px rgba(37,99,235,.12);
         }
+
         .actions {
             margin-top: 20px;
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
+
         .btn-soft {
             display: inline-block;
             padding: 11px 18px;
@@ -95,42 +134,64 @@
             font-weight: 600;
             transition: 0.2s;
             cursor: pointer;
+            text-align: center;
         }
+
+        .btn-soft:hover {
+            transform: translateY(-1px);
+            opacity: 0.96;
+        }
+
         .btn-primary-soft {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
         }
+
         .btn-secondary-soft {
             background: #e5e7eb;
             color: #111827;
         }
+
         .btn-warning-soft {
             background: #f59e0b;
             color: white;
         }
+
         .btn-danger-soft {
             background: #dc2626;
             color: white;
         }
+
+        .table-wrapper {
+            overflow-x: auto;
+            width: 100%;
+        }
+
         .table-modern {
             width: 100%;
             border-collapse: collapse;
+            min-width: 700px;
         }
+
         .table-modern th {
             background: #f3f4f6;
             padding: 14px;
             text-align: left;
             font-size: 14px;
             color: #374151;
+            white-space: nowrap;
         }
+
         .table-modern td {
             padding: 14px;
             border-top: 1px solid #e5e7eb;
             vertical-align: top;
         }
+
         .table-modern tr:hover td {
             background: #f9fafb;
         }
+
         .badge-soft {
             display: inline-block;
             padding: 8px 12px;
@@ -140,30 +201,144 @@
             font-weight: 700;
             font-size: 13px;
         }
+
         .stat-card {
             border: none;
             border-radius: 16px;
             color: white;
             box-shadow: 0 6px 18px rgba(0,0,0,0.08);
         }
+
         .stat-card .card-body {
             padding: 24px;
         }
+
         .stat-title {
             font-size: 15px;
             opacity: 0.9;
         }
+
         .stat-value {
             font-size: 30px;
             font-weight: bold;
             margin-top: 8px;
         }
+
         .bg-card-1 { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
         .bg-card-2 { background: linear-gradient(135deg, #059669, #047857); }
         .bg-card-3 { background: linear-gradient(135deg, #d97706, #b45309); }
         .bg-card-4 { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
         .bg-card-5 { background: linear-gradient(135deg, #dc2626, #b91c1c); }
         .bg-card-6 { background: linear-gradient(135deg, #0f766e, #115e59); }
+
+        @media (max-width: 991px) {
+            .top-user {
+                margin-top: 8px;
+                text-align: left;
+                font-size: 13px;
+            }
+
+            .sidebar {
+                min-height: auto;
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
+
+            .sidebar-links {
+                display: flex;
+                gap: 8px;
+                overflow-x: auto;
+                padding: 0 8px;
+                white-space: nowrap;
+            }
+
+            .sidebar-links a {
+                display: inline-block;
+                margin: 4px 0;
+                padding: 10px 14px;
+                border-radius: 10px;
+                flex: 0 0 auto;
+            }
+
+            .content-area {
+                padding: 18px;
+            }
+
+            .page-card {
+                padding: 18px;
+                border-radius: 14px;
+            }
+
+            .page-title {
+                font-size: 26px;
+            }
+
+            .actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-soft {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .navbar {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+
+            .navbar-brand {
+                font-size: 18px;
+            }
+
+            .top-user {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            .content-area {
+                padding: 14px;
+            }
+
+            .page-card {
+                padding: 16px;
+            }
+
+            .page-title {
+                font-size: 22px;
+            }
+
+            .page-subtitle {
+                font-size: 14px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .field input,
+            .field textarea,
+            .field select {
+                padding: 11px 12px;
+                font-size: 14px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .stat-title {
+                font-size: 14px;
+            }
+
+            .badge-soft {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -176,23 +351,31 @@
 %>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <a class="navbar-brand" href="<%= request.getContextPath() %>/dashboard">Gestion Locations</a>
-    <div class="ms-auto text-white">
-        Connecté : <strong><%= nomUtilisateur %></strong> — <%= roleUtilisateur %>
+    <div class="container-fluid px-0">
+        <a class="navbar-brand" href="<%= request.getContextPath() %>/dashboard">Gestion Locations</a>
+        <div class="ms-auto top-user">
+            Connecté : <strong><%= nomUtilisateur %></strong> — <%= roleUtilisateur %>
+        </div>
     </div>
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2 sidebar">
-            <a href="<%= request.getContextPath() %>/dashboard" class="<%= uri.contains("/dashboard") ? "active" : "" %>">Tableau de bord</a>
-            <a href="<%= request.getContextPath() %>/immeubles" class="<%= uri.contains("/immeubles") ? "active" : "" %>">Immeubles</a>
-            <a href="<%= request.getContextPath() %>/unites" class="<%= uri.contains("/unites") ? "active" : "" %>">Unités</a>
-            <a href="<%= request.getContextPath() %>/locataires" class="<%= uri.contains("/locataires") ? "active" : "" %>">Locataires</a>
-            <a href="<%= request.getContextPath() %>/contrats" class="<%= uri.contains("/contrats") ? "active" : "" %>">Contrats</a>
-            <a href="<%= request.getContextPath() %>/paiements" class="<%= uri.contains("/paiements") ? "active" : "" %>">Paiements</a>
-            <a href="<%= request.getContextPath() %>/utilisateurs" class="<%= uri.contains("/utilisateurs") ? "active" : "" %>">Utilisateurs</a>
-            <a href="<%= request.getContextPath() %>/reports" class="<%= uri.contains("/reports") ? "active" : "" %>">Rapports</a>
-            <a href="<%= request.getContextPath() %>/logout">Déconnexion</a>
+    <div class="row layout-row">
+        <div class="col-12 col-lg-2 sidebar">
+            <div class="sidebar-links">
+                <a href="<%= request.getContextPath() %>/dashboard" class="<%= uri.contains("/dashboard") ? "active" : "" %>">Tableau de bord</a>
+                <a href="<%= request.getContextPath() %>/immeubles" class="<%= uri.contains("/immeubles") ? "active" : "" %>">Immeubles</a>
+                <a href="<%= request.getContextPath() %>/unites" class="<%= uri.contains("/unites") ? "active" : "" %>">Unités</a>
+                <a href="<%= request.getContextPath() %>/locataires" class="<%= uri.contains("/locataires") ? "active" : "" %>">Locataires</a>
+                <a href="<%= request.getContextPath() %>/contrats" class="<%= uri.contains("/contrats") ? "active" : "" %>">Contrats</a>
+                <a href="<%= request.getContextPath() %>/paiements" class="<%= uri.contains("/paiements") ? "active" : "" %>">Paiements</a>
+                 <a href="${pageContext.request.contextPath}/demandes"
+                       class="<%= uri.contains("/demandes") ? "active" : "" %>">
+                       Demandes
+                    </a>
+                <a href="<%= request.getContextPath() %>/utilisateurs" class="<%= uri.contains("/utilisateurs") ? "active" : "" %>">Utilisateurs</a>
+                <a href="<%= request.getContextPath() %>/reports" class="<%= uri.contains("/reports") ? "active" : "" %>">Rapports</a>
+                <a href="<%= request.getContextPath() %>/logout">Déconnexion</a>
+            </div>
         </div>
-        <div class="col-md-10 content-area">
+        <div class="col-12 col-lg-10 content-area">
