@@ -11,8 +11,8 @@
     <h1 class="page-title">Gestion des demandes</h1>
     <p class="page-subtitle">Suivi des demandes de location soumises par les locataires.</p>
 
-    <div class="table-responsive mt-4">
-        <table class="table table-bordered bg-white">
+    <div class="table-wrapper">
+        <table class="table-modern" style="min-width: 850px;">
             <thead>
             <tr>
                 <th>ID</th>
@@ -44,31 +44,31 @@
                 <td><%= d.getDateDemande() %></td>
                 <td><%= d.getStatut() %></td>
                 <td><%= d.getCommentaire() != null ? d.getCommentaire() : "-" %></td>
-               <td>
-                   <% if ("EN_ATTENTE".equalsIgnoreCase(d.getStatut())) { %>
-                       <a class="btn btn-sm btn-success" href="<%= request.getContextPath() %>/demandes?action=accepter&id=<%= d.getId() %>">Accepter</a>
-                       <a class="btn btn-sm btn-danger" href="<%= request.getContextPath() %>/demandes?action=refuser&id=<%= d.getId() %>">Refuser</a>
+                <td>
+                    <% if ("EN_ATTENTE".equalsIgnoreCase(d.getStatut())) { %>
+                        <a class="btn-soft btn-primary-soft" href="<%= request.getContextPath() %>/demandes?action=accepter&id=<%= d.getId() %>">Accepter</a>
+                        <a class="btn-soft btn-danger-soft" href="<%= request.getContextPath() %>/demandes?action=refuser&id=<%= d.getId() %>">Refuser</a>
 
-                   <% } else if ("ACCEPTEE".equalsIgnoreCase(d.getStatut())) { %>
-                       <a class="btn btn-sm btn-primary" href="<%= request.getContextPath() %>/contrats?action=fromDemande&demandeId=<%= d.getId() %>">Créer contrat</a>
+                    <% } else if ("ACCEPTEE".equalsIgnoreCase(d.getStatut())) { %>
+                        <a class="btn-soft btn-warning-soft" href="<%= request.getContextPath() %>/contrats?action=fromDemande&demandeId=<%= d.getId() %>">Créer contrat</a>
 
-                   <% } else if ("CONTRAT_CREE".equalsIgnoreCase(d.getStatut())) { %>
-                       <span class="badge bg-primary">Contrat créé</span>
+                    <% } else if ("CONTRAT_CREE".equalsIgnoreCase(d.getStatut())) { %>
+                        <span class="badge-soft">Contrat créé</span>
 
-                   <% } else if ("REFUSEE".equalsIgnoreCase(d.getStatut())) { %>
-                       <span class="badge bg-danger">Refusée</span>
+                    <% } else if ("REFUSEE".equalsIgnoreCase(d.getStatut())) { %>
+                        <span class="badge bg-danger">Refusée</span>
 
-                   <% } else { %>
-                       <span class="text-muted">Traitée</span>
-                   <% } %>
-               </td>
+                    <% } else { %>
+                        <span class="text-muted">Traitée</span>
+                    <% } %>
+                </td>
             </tr>
             <%
                     }
                 } else {
             %>
             <tr>
-                <td colspan="8" class="text-center">Aucune demande trouvée.</td>
+                <td colspan="8" style="text-align:center;">Aucune demande trouvée.</td>
             </tr>
             <%
                 }

@@ -338,6 +338,41 @@
                 font-size: 12px;
                 padding: 6px 10px;
             }
+            .table-wrapper {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .table-modern {
+                width: 100%;
+                min-width: 850px;
+                border-collapse: collapse;
+            }
+
+            .table-modern th,
+            .table-modern td {
+                white-space: nowrap;
+            }
+
+            @media (max-width: 768px) {
+                .content-area {
+                    padding: 16px;
+                }
+
+                .page-card {
+                    padding: 16px;
+                    border-radius: 18px;
+                }
+
+                .page-title {
+                    font-size: 24px;
+                }
+
+                .page-subtitle {
+                    font-size: 15px;
+                }
+            }
         }
     </style>
 </head>
