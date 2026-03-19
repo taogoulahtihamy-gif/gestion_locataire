@@ -4,22 +4,20 @@
 
 <div class="page-card">
 
-    <!-- HEADER -->
     <div class="header">
         <h1>Rapports & Statistiques</h1>
 
         <div class="export-actions">
-            <button onclick="exportPDF()" class="btn-soft btn-primary-soft">
+            <button type="button" onclick="exportPDF()" class="btn-soft btn-primary-soft">
                 📄 Export PDF
             </button>
 
-            <button onclick="exportExcel()" class="btn-soft btn-success-soft">
+            <button type="button" onclick="exportExcel()" class="btn-soft btn-success-soft">
                 📊 Export Excel
             </button>
         </div>
     </div>
 
-    <!-- CARDS -->
     <div class="report-stats-grid">
 
         <div class="report-stat-card">
@@ -47,23 +45,22 @@
     </div>
 </div>
 
-<!-- STYLE PRO -->
 <style>
-
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
     flex-wrap: wrap;
+    gap: 16px;
 }
 
 .export-actions {
     display: flex;
     gap: 14px;
+    flex-wrap: wrap;
 }
 
-/* BOUTONS PRO */
 .btn-soft {
     border: none;
     border-radius: 20px;
@@ -96,7 +93,6 @@
     background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 
-/* CARDS */
 .report-stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -129,7 +125,6 @@
     background: linear-gradient(135deg, #e0f2fe, #dbeafe);
 }
 
-/* PRINT */
 @media print {
     .export-actions,
     button {
@@ -144,15 +139,8 @@
         box-shadow: none;
     }
 }
-
 </style>
 
-<!-- SCRIPT -->
-<script>
-
-function exportPDF() {
-    window.location.href = "<%= request.getContextPath() %>/reports/pdf";
-}
 <script>
 function exportPDF() {
     window.location.href = "<%= request.getContextPath() %>/reports/pdf";

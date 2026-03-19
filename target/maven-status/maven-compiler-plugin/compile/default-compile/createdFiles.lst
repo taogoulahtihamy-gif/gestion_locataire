@@ -25,7 +25,6 @@ com\location\entity\Immeuble.class
 com\location\entity\Paiement.class
 com\location\service\UniteService.class
 com\location\controller\ContratServlet.class
-com\location\controller\ReceiptServlet.class
 com\location\service\AuthService.class
 com\location\service\LocataireService.class
 com\location\controller\DemandeServlet.class
@@ -40,6 +39,7 @@ com\location\service\UniteLocationService.class
 com\location\util\BootstrapData.class
 com\location\dao\UtilisateurDao.class
 com\location\service\ReportService.class
+com\location\controller\ReceiptPdfServlet.class
 com\location\entity\Locataire.class
 com\location\entity\UniteLocation.class
 com\location\service\UtilisateurService.class

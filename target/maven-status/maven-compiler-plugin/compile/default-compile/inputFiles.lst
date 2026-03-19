@@ -23,8 +23,8 @@ C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\loc
 C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\controller\DemandeServlet.java
 C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\controller\ReportServlet.java
 C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\dao\ImmeubleDao.java
-C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\controller\ReceiptServlet.java
 C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\entity\Locataire.java
+C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\controller\ReceiptPdfServlet.java
 C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\dao\PaiementDao.java
 C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\util\BootstrapData.java
 C:\Users\taogo\Downloads\jee-immeuble-app\jee-immeuble-app\src\main\java\com\location\util\PasswordUtil.java

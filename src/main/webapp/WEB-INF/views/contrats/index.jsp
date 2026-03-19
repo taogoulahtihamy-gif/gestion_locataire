@@ -23,6 +23,7 @@
         <div class="actions"><button class="btn" type="submit"><%= item != null ? "Mettre à jour" : "Créer le contrat" %></button><a class="btn btn-secondary" href="<%= request.getContextPath() %>/contrats">Réinitialiser</a></div>
     </form>
 </div>
+<div class="table-wrapper">
 <table class="table">
     <tr><th>ID</th><th>Locataire</th><th>Unité</th><th>Début</th><th>Fin</th><th>Statut</th><th>Actions</th></tr>
     <% for (ContratLocation c : items) { %>
@@ -32,4 +33,5 @@
     </tr>
     <% } %>
 </table>
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jspf" %>
