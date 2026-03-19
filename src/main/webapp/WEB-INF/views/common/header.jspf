@@ -25,14 +25,15 @@
             text-align: right;
         }
 
-        .layout-row {
+        .sidebar {
+            background: #1f2937;
+            padding: 20px 0;
             min-height: calc(100vh - 56px);
         }
 
-        .sidebar {
-            min-height: calc(100vh - 56px);
-            background: #1f2937;
-            padding-top: 20px;
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar a {
@@ -163,14 +164,15 @@
         }
 
         .table-wrapper {
-            overflow-x: auto;
             width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .table-modern {
             width: 100%;
+            min-width: 850px;
             border-collapse: collapse;
-            min-width: 700px;
         }
 
         .table-modern th {
@@ -186,6 +188,7 @@
             padding: 14px;
             border-top: 1px solid #e5e7eb;
             vertical-align: top;
+            white-space: nowrap;
         }
 
         .table-modern tr:hover td {
@@ -240,19 +243,18 @@
 
             .sidebar {
                 min-height: auto;
-                padding-top: 12px;
-                padding-bottom: 12px;
+                padding: 10px 0;
             }
 
             .sidebar-links {
-                display: flex;
+                flex-direction: row;
                 gap: 8px;
                 overflow-x: auto;
-                padding: 0 8px;
                 white-space: nowrap;
+                padding: 0 8px;
             }
 
-            .sidebar-links a {
+            .sidebar a {
                 display: inline-block;
                 margin: 4px 0;
                 padding: 10px 14px;
@@ -266,7 +268,7 @@
 
             .page-card {
                 padding: 18px;
-                border-radius: 14px;
+                border-radius: 16px;
             }
 
             .page-title {
@@ -312,6 +314,7 @@
 
             .page-subtitle {
                 font-size: 14px;
+                line-height: 1.5;
             }
 
             .form-grid {
@@ -338,41 +341,6 @@
                 font-size: 12px;
                 padding: 6px 10px;
             }
-            .table-wrapper {
-                width: 100%;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .table-modern {
-                width: 100%;
-                min-width: 850px;
-                border-collapse: collapse;
-            }
-
-            .table-modern th,
-            .table-modern td {
-                white-space: nowrap;
-            }
-
-            @media (max-width: 768px) {
-                .content-area {
-                    padding: 16px;
-                }
-
-                .page-card {
-                    padding: 16px;
-                    border-radius: 18px;
-                }
-
-                .page-title {
-                    font-size: 24px;
-                }
-
-                .page-subtitle {
-                    font-size: 15px;
-                }
-            }
         }
     </style>
 </head>
@@ -395,22 +363,20 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row layout-row">
+    <div class="row">
         <div class="col-12 col-lg-2 sidebar">
             <div class="sidebar-links">
                 <a href="<%= request.getContextPath() %>/dashboard" class="<%= uri.contains("/dashboard") ? "active" : "" %>">Tableau de bord</a>
                 <a href="<%= request.getContextPath() %>/immeubles" class="<%= uri.contains("/immeubles") ? "active" : "" %>">Immeubles</a>
                 <a href="<%= request.getContextPath() %>/unites" class="<%= uri.contains("/unites") ? "active" : "" %>">Unités</a>
                 <a href="<%= request.getContextPath() %>/locataires" class="<%= uri.contains("/locataires") ? "active" : "" %>">Locataires</a>
+                <a href="<%= request.getContextPath() %>/demandes" class="<%= uri.contains("/demandes") ? "active" : "" %>">Demandes</a>
                 <a href="<%= request.getContextPath() %>/contrats" class="<%= uri.contains("/contrats") ? "active" : "" %>">Contrats</a>
                 <a href="<%= request.getContextPath() %>/paiements" class="<%= uri.contains("/paiements") ? "active" : "" %>">Paiements</a>
-                 <a href="${pageContext.request.contextPath}/demandes"
-                       class="<%= uri.contains("/demandes") ? "active" : "" %>">
-                       Demandes
-                    </a>
                 <a href="<%= request.getContextPath() %>/utilisateurs" class="<%= uri.contains("/utilisateurs") ? "active" : "" %>">Utilisateurs</a>
                 <a href="<%= request.getContextPath() %>/reports" class="<%= uri.contains("/reports") ? "active" : "" %>">Rapports</a>
                 <a href="<%= request.getContextPath() %>/logout">Déconnexion</a>
             </div>
         </div>
+
         <div class="col-12 col-lg-10 content-area">
